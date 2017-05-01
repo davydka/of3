@@ -1,0 +1,19 @@
+{
+  "name": "of3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+	  "watch": "nodemon -w src -x \"make && make run\" -e \".cpp\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davydka/of3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davydka/of3/issues"
+  },
+  "homepage": "https://github.com/davydka/of3#readme"
+}

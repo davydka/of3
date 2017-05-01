@@ -1,0 +1,100 @@
+#include "ofApp.h"
+
+ofImage img;
+ofTexture texture;
+ofPlanePrimitive plane;
+float tx0, ty0, tx1, ty1;
+float rot;
+
+void ofApp::setup(){
+	ofSetWindowShape(1920, 1080);
+
+    ofDisableArbTex();
+    img.loadImage("images/img.jpg");
+    texture = img.getTextureReference();
+    texture.setTextureWrap(GL_REPEAT, GL_REPEAT);
+    
+    //plane.set(1600, 1200);
+    plane.set(800, 600, 80, 60);
+	plane.setPosition(plane.getWidth()/2, plane.getHeight()/2, 0);
+    //plane.setPosition(img.getWidth(), img.getHeight(), 1);
+    //plane.setResolution(2, 2);
+	
+}
+
+void ofApp::update(){
+    tx0 = ofMap(mouseX, 0, ofGetWidth()/2, 0, 1);
+    ty0 = ofMap(mouseY, 0, ofGetHeight()/2, 0, 1);
+    tx1 = tx0 + 1;
+    ty1 = ty0 + 1;
+    //plane.mapTexCoords(tx0, ty0, tx1, ty1);
+    //plane.mapTexCoords(0, 0, ofGetWidth(), ofGetHeight());
+    //plane.mapTexCoords(0, 0, 1, 1);
+	rot = ofMap(sin(ofGetElapsedTimef()), -1, 1, 1, 8);
+    plane.mapTexCoords(0, 0, rot, rot);
+	//ofLog(OF_LOG_NOTICE, ofToString(rot));
+	//plane.rotate(rot, 100, 100, 0);
+}
+
+void ofApp::draw(){
+    texture.bind();
+    plane.draw();
+    texture.unbind();
+}
+
+
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseMoved(int x, int y ){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseReleased(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseEntered(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseExited(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::windowResized(int w, int h){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::gotMessage(ofMessage msg){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
+
+}
+
