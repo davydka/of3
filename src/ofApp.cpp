@@ -23,7 +23,7 @@ void ofApp::setup(){
 	int planeRows = planeHeight / planeGridSize;
 
    
-	shader_keliedo.load("shadersGL2/kaleidoscope");
+	shader_keliedo.load("shaders/kaleidoscope");
 
 	movieMovie.setPixelFormat(OF_PIXELS_NATIVE);
 	movieMovie.load("trailer_320.mp4");
