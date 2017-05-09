@@ -4,43 +4,48 @@
 	<style>
 		body{
 			margin:0;
+			/*background:black;*/
+			background:#666;
+		}
+		#container div {
+			position: absolute;
+			bottom:0;
+			right:0;
 		}
 	</style>
 </head>
 <body>
 
+<div id="container"></div>
 
 <script type="x-shader/x-vertex" id="vertex-shader">
-	precision mediump float;
-
-	attribute vec3 vertexPosition;
-	varying vec2 position;
-
-	void main() {
-	  gl_Position = vec4(vertexPosition, 1.0);
-	  position = (vertexPosition.xy + 1.0) * 0.5;
+	varying vec2 vUv;
+	void main()	{
+		vUv = uv;
+		vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+		gl_Position = projectionMatrix * modelViewPosition;
+		//gl_Position = vec4( position, 1.0 ); //acheives a fullscreen effect nicely
 	}
 </script>
 
 <script type="x-shader/x-fragment" id="fragment-shader">
-	precision mediump float;
-
-	varying vec2 position;
+	varying vec2 vUv;
 	uniform sampler2D texture1;
+
+	uniform vec2 resolution;
+	uniform float time;
 
 	float wave(float x, float amount) {
 	  return (sin(x * amount) + 1.) * .5;
 	}
-
-	void main() {
-	  vec4 color = texture2D(texture1, position);
-	  gl_FragColor.r = wave(color.r, 10.);
-	  gl_FragColor.g = wave(color.g, 20.);
-	  gl_FragColor.b = wave(color.b, 40.);
-	  gl_FragColor.a = 1.;
+	void main()	{
+		vec4 color = texture2D(texture1, vUv);
+		gl_FragColor.r = wave(color.r, time);
+		gl_FragColor.g = wave(color.g, time*2.);
+		gl_FragColor.b = wave(color.b, time*4.);
+		gl_FragColor.a = 1.;
 	}
 </script>
-
 
 <script src="/vendor/three.min.js"></script>
 <script src="/vendor/three.orbitControls.js"></script>
