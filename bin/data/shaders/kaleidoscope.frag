@@ -4,6 +4,7 @@
 precision mediump float;
 #endif
 
+/*
 const float PI = 3.141592658;
 const float TAU = 2.0 * PI;
 const float sections = 10.0;
@@ -35,3 +36,24 @@ void main(void){
    gl_FragColor = texture2D(tex0, vec2(x-t,y-t)/resolution.y); //back to texture space
    
 }
+*/
+
+	uniform vec2 mouse;
+	uniform vec2 uvOffset;
+	varying vec2 vUv;
+	uniform sampler2D texture1;
+
+	uniform vec2 resolution;
+	uniform float time;
+
+	float wave(float x, float amount) {
+		return (sin(x * amount) + 1.) * .5;
+		//return sin(x);
+	}
+	void main()	{
+		vec4 color = texture2D(texture1, vUv);
+		gl_FragColor.r = wave(color.r, uvOffset.x);
+		gl_FragColor.g = wave(color.g, uvOffset.x);
+		gl_FragColor.b = wave(color.b, uvOffset.x);
+		gl_FragColor.a = 1.;
+	}

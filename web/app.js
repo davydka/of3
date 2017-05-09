@@ -19,7 +19,7 @@ function init() {
 	// camera.position.z = 800;
 
 	camera = new THREE.OrthographicCamera( width / - 4, width / 4, height / 4, height / - 4, 0, 5000 );
-	//camera.position.z = 1000;
+	camera.position.z = 1000;
 	camera.zoom = .5;
 
 	camera.updateProjectionMatrix();
@@ -42,6 +42,7 @@ function init() {
 	container.appendChild( stats.domElement );
 
 	var loader = new THREE.TextureLoader();
+
 	loader.load('/img.jpg', function(texture){
 		// texture.minFilter = THREE.LinearFilter;
 		uniforms = {
@@ -64,20 +65,23 @@ function init() {
 		mesh = new THREE.Mesh( geometry, material );
 		scene.add( mesh );
 
-		onWindowResize();
-		window.addEventListener( 'resize', onWindowResize, false );
-
 	})
 
 
 
-	/*
-	var geometry2 = new THREE.PlaneGeometry( 1000, 500, 32 );
+	onWindowResize();
+	window.addEventListener( 'resize', onWindowResize, false );
+
+
+
+	var geometry2 = new THREE.PlaneGeometry( 100, 100, 32 );
 	var material2 = new THREE.MeshBasicMaterial( {color: 0xff0000, side: THREE.DoubleSide} );
 	var plane = new THREE.Mesh( geometry2, material2 );
-	plane.position.z = -1;
+	plane.name = 'plane';
+	plane.position.z = 1;
+	plane.position.x = -300;
 	scene.add( plane );
-	*/
+
 
 
 
@@ -92,8 +96,10 @@ function onWindowResize( event ) {
 	// renderer.domElement.width = width;
 	// renderer.domElement.height = height;
 
-	uniforms.resolution.value.x = renderer.domElement.width;
-	uniforms.resolution.value.y = renderer.domElement.height;
+	if(uniforms) {
+		uniforms.resolution.value.x = renderer.domElement.width;
+		uniforms.resolution.value.y = renderer.domElement.height;
+	}
 
 }
 

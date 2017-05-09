@@ -56,9 +56,10 @@ void ofApp::draw(){
 	float mousePositionX = ofMap(mouseX, 0, ofGetWidth(), plane.getWidth(), -plane.getWidth(), true);
 	float mousePositionY = ofMap(mouseY, 0, ofGetHeight(), plane.getHeight(), -plane.getHeight(), true);
 
-	float mouseNormX =((float)mouseX)/((float)ofGetWidth());
+	float mouseNormX = ofMap(sin(ofGetElapsedTimef()), -1, 1, 1, 100);
+	//float mouseNormX =((float)mouseX)/((float)ofGetWidth());
 	float mouseNormY =((float)mouseY)/((float)ofGetHeight());
-   
+
 	shader_keliedo.begin();
 	shader_keliedo.setUniform2f("mouse", mousePositionX, mousePositionY);
 	shader_keliedo.setUniform1f("time", ofGetElapsedTimef());
@@ -72,6 +73,8 @@ void ofApp::draw(){
 	ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
 	img.draw(-img.getWidth()/2, -img.getHeight()/2);
 	//img.draw(ofGetWidth()/2, ofGetHeight()/2);
+
+	//std::cout<<mouseNormX<<std::endl;
 }
 
 //--------------------------------------------------------------

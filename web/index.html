@@ -37,12 +37,13 @@
 
 	float wave(float x, float amount) {
 	  return (sin(x * amount) + 1.) * .5;
+	  //return sin(amount) * x;
 	}
 	void main()	{
 		vec4 color = texture2D(texture1, vUv);
 		gl_FragColor.r = wave(color.r, time);
-		gl_FragColor.g = wave(color.g, time*2.);
-		gl_FragColor.b = wave(color.b, time*4.);
+		gl_FragColor.g = wave(color.g, time);
+		gl_FragColor.b = wave(color.b, time);
 		gl_FragColor.a = 1.;
 	}
 </script>
